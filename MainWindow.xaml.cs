@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,9 +24,20 @@ namespace WPFApp
 		public MainWindow()
 		{
 			InitializeComponent();
+			CreateTask();
 		}
 
-		
+		void AddMessage(string message) 
+		{
+			int CurrentThreadId = Thread.CurrentThread.ManagedThreadId;
+			this.Dispatcher.Invoke(() =>
+			{
+				Messages.Content +=
+					$"Mensaje: {message}, " +
+					$"Hilo actual: {CurrentThreadId}\n";
+			});
+
+		}
 
 		void CreateTask() 
 		{
@@ -61,7 +73,10 @@ namespace WPFApp
 
 			Task T6 = new Task((message) => 
 			MessageBox.Show(message.ToString()), "Expresion lambda con parametros.");
-			
+
+			Task T7 = new Task(() => AddMessage("Ejecutando la tarea."));
+			T7.Start();
+			AddMessage("En el hilo principal");
 
 
 		}
