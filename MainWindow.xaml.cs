@@ -24,6 +24,9 @@ namespace WPFApp
 		{
 			InitializeComponent();
 		}
+
+		
+
 		void CreateTask() 
 		{
 			Task T;
@@ -36,8 +39,33 @@ namespace WPFApp
 				MessageBox.Show("Ejecutando una tarea en un metodo anonimo.");
 			}
 			);
-		
+			Task T3A = new Task(ShowMesage);
+			Task T3 = new Task(
+				() =>ShowMesage()
+				);
+
+			// Expresión Lambda;
+			// (Parámetros de entrada) => Expresión
+			// () => Expresión
+			// El operador lambda (=>) se lee como "va hacia"
+
+			Task T4 = new Task(() => MessageBox.Show("Ejecutando la tarea 4") );
+
+			Task T5 = new Task(() =>
+			{
+				DateTime CurrentDate = DateTime.Today;
+				DateTime StartDate = CurrentDate.AddDays(30);
+				MessageBox.Show($"Tarea 5. Fecha Calculada: {StartDate}");
+			}
+			);
+
+			Task T6 = new Task((message) => 
+			MessageBox.Show(message.ToString()), "Expresion lambda con parametros.");
+			
+
+
 		}
+
 		void ShowMesage()
 		{
 			MessageBox.Show("Ejecutando el Metodo ShowMessage");
