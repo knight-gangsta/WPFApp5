@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace WPFApp
 {
+	//Task - METODOS DELEGADOS,ANONIMOS, LAMBDA Y HILOS 
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
